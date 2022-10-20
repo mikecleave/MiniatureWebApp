@@ -1,0 +1,49 @@
+﻿@page
+@model MiniatureWebApp.Pages.PowerStations.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PowerStation</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PowerStation.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PowerStation.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PowerStation.Longitude)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PowerStation.Longitude)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PowerStation.Latitude)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PowerStation.Latitude)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PowerStation.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PowerStation.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PowerStation.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PowerStation.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.PowerStation?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

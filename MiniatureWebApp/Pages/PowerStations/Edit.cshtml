@@ -1,0 +1,55 @@
+﻿@page
+@model MiniatureWebApp.Pages.PowerStations.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PowerStation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PowerStation.Id" />
+            <div class="form-group">
+                <label asp-for="PowerStation.Name" class="control-label"></label>
+                <input asp-for="PowerStation.Name" class="form-control" />
+                <span asp-validation-for="PowerStation.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerStation.Longitude" class="control-label"></label>
+                <input asp-for="PowerStation.Longitude" class="form-control" />
+                <span asp-validation-for="PowerStation.Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerStation.Latitude" class="control-label"></label>
+                <input asp-for="PowerStation.Latitude" class="form-control" />
+                <span asp-validation-for="PowerStation.Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerStation.PhoneNumber" class="control-label"></label>
+                <input asp-for="PowerStation.PhoneNumber" class="form-control" />
+                <span asp-validation-for="PowerStation.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerStation.Address" class="control-label"></label>
+                <input asp-for="PowerStation.Address" class="form-control" />
+                <span asp-validation-for="PowerStation.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

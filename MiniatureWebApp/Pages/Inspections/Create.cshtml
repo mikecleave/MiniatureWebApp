@@ -1,0 +1,53 @@
+﻿@page
+@model MiniatureWebApp.Pages.Inspections.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Inspection</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Inspection.PowerStationId" class="control-label"></label>
+                <select asp-for="Inspection.PowerStationId" class ="form-control" asp-items="ViewBag.PowerStationId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inspection.Date" class="control-label"></label>
+                <input asp-for="Inspection.Date" class="form-control" />
+                <span asp-validation-for="Inspection.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inspection.InspectorName" class="control-label"></label>
+                <input asp-for="Inspection.InspectorName" class="form-control" />
+                <span asp-validation-for="Inspection.InspectorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inspection.Comment" class="control-label"></label>
+                <input asp-for="Inspection.Comment" class="form-control" />
+                <span asp-validation-for="Inspection.Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inspection.Status" class="control-label"></label>
+                <input asp-for="Inspection.Status" class="form-control" />
+                <span asp-validation-for="Inspection.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

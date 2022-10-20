@@ -1,0 +1,60 @@
+﻿@page
+@model MiniatureWebApp.Pages.Inspections.IndexModel
+
+@{
+    ViewData["Title"] = "Inspections";
+}
+
+<h1>Inspections</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspection[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspection[0].InspectorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspection[0].Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspection[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspection[0].PowerStation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Inspection) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InspectorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PowerStation.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
