@@ -18,16 +18,10 @@
             @Html.DisplayFor(model => model.PowerStation.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PowerStation.Longitude)
+            @Html.DisplayNameFor(model => model.PowerStation.Address)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PowerStation.Longitude)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PowerStation.Latitude)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PowerStation.Latitude)
+            @Html.DisplayFor(model => model.PowerStation.Address)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PowerStation.PhoneNumber)
@@ -36,11 +30,34 @@
             @Html.DisplayFor(model => model.PowerStation.PhoneNumber)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PowerStation.Address)
+            @Html.DisplayNameFor(model => model.PowerStation.Latitude)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PowerStation.Address)
+            @Html.DisplayFor(model => model.PowerStation.Latitude)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PowerStation.Longitude)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PowerStation.Longitude)
+        </dd>
+        
+
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <script type="module" src="~/js/Map.js"></script>
+        
+        <body>
+            <h3>Latitude @Html.DisplayFor(model => model.PowerStation.Latitude)</h3>
+            <!--The div element for the map -->
+            <div id="map" latitude=@Html.DisplayFor(model => model.PowerStation.Latitude) longitude=@Html.DisplayFor(model => model.PowerStation.Longitude)></div>
+
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_b0lFls_Ll_tbk4ftrvHA0msoFQrFI9c&callback=initMap&v=weekly"
+                defer
+            ></script>
+        </body>
+
+
     </dl>
 </div>
 <div>

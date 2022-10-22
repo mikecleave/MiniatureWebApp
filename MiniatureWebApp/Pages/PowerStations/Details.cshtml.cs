@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiniatureWebApp.Data;
 using MiniatureWebApp.Models;
@@ -36,6 +37,7 @@ namespace MiniatureWebApp.Pages.PowerStations
             else 
             {
                 PowerStation = powerstation;
+                var lattitude = @ViewData["lattitude"];
             }
             return Page();
         }

@@ -2,12 +2,10 @@
 
 namespace MiniatureWebApp.Models
 {
-    /*
     public enum Status
     {
         SCHEDULED, PASS, FAIL
-    }
-    */
+    }    
 
     public class Inspection
     {
@@ -17,9 +15,9 @@ namespace MiniatureWebApp.Models
         public string InspectorName { get; set; }
         public string Comment { get; set; }
 
-        [DisplayFormat(NullDisplayText = "Unknown")]
-        //public Status Status { get; set; }
-        public string Status { get; set; }
+        //[DisplayFormat(NullDisplayText = "Unknown")]
+        public Status Status { get; set; }
+        //public string Status { get; set; }
 
         public PowerStation? PowerStation { get; set; }
 
