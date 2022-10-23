@@ -36,7 +36,7 @@ namespace MiniatureWebApp.Pages.Inspections
                 return NotFound();
             }
             Inspection = inspection;
-           ViewData["PowerStationId"] = new SelectList(_context.PowerStations, "Id", "Id");
+            ViewData["PowerStationId"] = new SelectList(_context.PowerStations, "Id", "Name");
             return Page();
         }
 

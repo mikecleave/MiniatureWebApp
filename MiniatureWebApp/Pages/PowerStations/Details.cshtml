@@ -9,7 +9,12 @@
 
 <div>
     <h4>PowerStation</h4>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.PowerStation?.Id">Edit</a> |
+        <a asp-page="./Index">Back to List</a>
+    </div>
     <hr />
+
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PowerStation.Name)
@@ -47,7 +52,6 @@
         <script type="module" src="~/js/Map.js"></script>
         
         <body>
-            <h3>Latitude @Html.DisplayFor(model => model.PowerStation.Latitude)</h3>
             <!--The div element for the map -->
             <div id="map" latitude=@Html.DisplayFor(model => model.PowerStation.Latitude) longitude=@Html.DisplayFor(model => model.PowerStation.Longitude)></div>
 
@@ -60,7 +64,4 @@
 
     </dl>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.PowerStation?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+

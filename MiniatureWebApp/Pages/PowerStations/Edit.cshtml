@@ -8,6 +8,9 @@
 <h1>Edit</h1>
 
 <h4>PowerStation</h4>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -44,10 +47,18 @@
             </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="~/js/Map.js"></script>
+
+    <body>
+        <!--The div element for the map -->
+        <div id="map" latitude=@Html.DisplayFor(model => model.PowerStation.Latitude) longitude=@Html.DisplayFor(model => model.PowerStation.Longitude)></div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_b0lFls_Ll_tbk4ftrvHA0msoFQrFI9c&callback=initMap&v=weekly"
+                defer></script>
+    </body>
+
 </div>
 
 @section Scripts {

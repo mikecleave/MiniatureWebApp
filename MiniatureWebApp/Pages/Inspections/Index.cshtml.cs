@@ -17,6 +17,7 @@ namespace MiniatureWebApp.Pages.Inspections
         public IndexModel(MiniatureWebApp.Data.MiniatureWebAppContext context)
         {
             _context = context;
+
         }
 
         public IList<Inspection> Inspection { get;set; } = default!;
@@ -26,7 +27,8 @@ namespace MiniatureWebApp.Pages.Inspections
             if (_context.Inspections != null)
             {
                 Inspection = await _context.Inspections
-                .Include(i => i.PowerStation).ToListAsync();
+                    //.Where(i => i.PowerStation.Id == 1)
+                    .Include(i => i.PowerStation).ToListAsync();
             }
         }
     }
