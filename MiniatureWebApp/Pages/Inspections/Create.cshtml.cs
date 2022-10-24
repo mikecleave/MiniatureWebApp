@@ -21,7 +21,10 @@ namespace MiniatureWebApp.Pages.Inspections
 
         public IActionResult OnGet()
         {
-        ViewData["PowerStationId"] = new SelectList(_context.PowerStations, "Id", "Name");
+            ViewData["PowerStationId"] = new SelectList(_context.PowerStations, "Id", "Name");
+
+            List<string> statusList = new List<string>() {"Please select a status", "PASS", "FAIL", "SCHEDULED" };
+            ViewData["StatusList"] = new SelectList(statusList);
             return Page();
         }
 
@@ -35,6 +38,8 @@ namespace MiniatureWebApp.Pages.Inspections
           if (!ModelState.IsValid)
             {
                 ViewData["PowerStationId"] = new SelectList(_context.PowerStations, "Id", "Name");
+                List<string> statusList = new List<string>() { "Please select a status", "PASS", "FAIL", "SCHEDULED" };
+                ViewData["StatusList"] = new SelectList(statusList);
                 return Page();
             }
 

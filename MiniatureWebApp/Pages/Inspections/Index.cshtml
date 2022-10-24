@@ -3,20 +3,15 @@
 
 @{
     ViewData["Title"] = "Inspections";
+    List<SelectListItem> List1 = new List<SelectListItem>();
+    List1.Add(new SelectListItem() { Text = "Apple" });
+    List1.Add(new SelectListItem() { Text = "Banana" });
 }
 
 <h1>Inspections</h1>
-
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-
-<!--
-<div class="form-group">
-    <label asp-for="Inspection.PowerStationId" class="control-label"></label>
-    <select asp-for="Inspection.PowerStationId" class="form-control" asp-items="ViewBag.PowerStationId"></select>
-</div>
--->
 
 <table class="table">
     <thead>
@@ -26,12 +21,15 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].PowerStation)
+                @Html.DropDownList("Power Stations Filter", ViewBag.PowerStationList as SelectList, "All")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].InspectorName)
+                @Html.DropDownList("Inspector Name Filter", ViewBag.InspectorNameList as SelectList, "All")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].Status)
+                @Html.DropDownList("Status Filter", ViewBag.StatusList as SelectList, "All")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].Comment)

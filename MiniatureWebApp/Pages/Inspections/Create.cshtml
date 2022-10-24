@@ -14,7 +14,7 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Inspection.PowerStationId" class="control-label"></label>
+                <label asp-for="Inspection.PowerStationId" class="control-label">Power Station</label>
                 <select asp-for="Inspection.PowerStationId" class ="form-control" asp-items="ViewBag.PowerStationId"></select>
             </div>
             <div class="form-group">
@@ -23,7 +23,7 @@
                 <span asp-validation-for="Inspection.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Inspection.InspectorName" class="control-label"></label>
+                <label asp-for="Inspection.InspectorName" class="control-label">Inspector Name</label>
                 <input asp-for="Inspection.InspectorName" class="form-control" />
                 <span asp-validation-for="Inspection.InspectorName" class="text-danger"></span>
             </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Inspection.Status" class="control-label"></label>
-                <input asp-for="Inspection.Status" class="form-control" />
+                <select asp-for="Inspection.Status" class="form-control" asp-items="ViewBag.StatusList"></select>
                 <span asp-validation-for="Inspection.Status" class="text-danger"></span>
             </div>
             <div class="form-group">

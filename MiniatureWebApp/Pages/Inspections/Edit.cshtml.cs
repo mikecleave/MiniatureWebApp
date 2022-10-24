@@ -30,7 +30,11 @@ namespace MiniatureWebApp.Pages.Inspections
                 return NotFound();
             }
 
-            var inspection =  await _context.Inspections.FirstOrDefaultAsync(m => m.Id == id);
+            var inspection =  await _context.Inspections
+                .Include(i => i.PowerStation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+
             if (inspection == null)
             {
                 return NotFound();

@@ -19,7 +19,7 @@
             <input type="hidden" asp-for="Inspection.Id" />
             
             <div class="form-group">
-                <label asp-for="Inspection.PowerStationId" class="control-label" ></label>
+                <label asp-for="Inspection.PowerStationId" class="control-label" >Power Station</label>
                 <select asp-for="Inspection.PowerStationId" class="form-control" asp-items="ViewBag.PowerStationId"></select>
                 <span asp-validation-for="Inspection.PowerStationId" class="text-danger"></span>
             </div>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Inspection.InspectorName" class="control-label"></label>
+                <label asp-for="Inspection.InspectorName" class="control-label">InspectorName</label>
                 <input asp-for="Inspection.InspectorName" class="form-control" />
                 <span asp-validation-for="Inspection.InspectorName" class="text-danger"></span>
             </div>
@@ -44,7 +44,7 @@
 
             <div class="form-group">
                 <label asp-for="Inspection.Status" class="control-label"></label>
-                <input asp-for="Inspection.Status" class="form-control" />
+                <input asp-for="Inspection.Status" class="form-control" />                    
                 <span asp-validation-for="Inspection.Status" class="text-danger"></span>
             </div>
             
