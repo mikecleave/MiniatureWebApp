@@ -12,7 +12,7 @@ using MiniatureWebApp.Data;
 namespace MiniatureWebApp.Migrations
 {
     [DbContext(typeof(MiniatureWebAppContext))]
-    [Migration("20221021190548_1")]
+    [Migration("20221025154519_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

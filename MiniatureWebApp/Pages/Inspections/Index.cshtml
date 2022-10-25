@@ -20,26 +20,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Inspection[0].Date)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                    @Html.DisplayNameFor(model => model.Inspection[0].Date)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inspection[0].PowerStation)
-
+                <!--
                 <select id="Selector">
                     <option value="white">White</option>
                     <option value="red">Red</option>
                     <option value="blue">Blue</option>
                 </Select>
+                -->
                 
                 @Html.DropDownList("Power Stations Filter", ViewBag.PowerStationSelectList as SelectList, "All")
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Inspection[0].PowerStation)
+                </a>                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inspection[0].InspectorName)
                 @Html.DropDownList("Inspector Name Filter", ViewBag.InspectorNameList as SelectList, "All")
+                @Html.DisplayNameFor(model => model.Inspection[0].InspectorName)                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inspection[0].Status)
                 @Html.DropDownList("Status Filter", inspectionStatus, "All")
+                @Html.DisplayNameFor(model => model.Inspection[0].Status)                
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].Comment)
@@ -80,6 +85,7 @@
 <script type = "text/javascript" src="~/js/filter.js"></script>                  
 
 <script>
-    document.getElementById("Selector").onchange = changeListener;
-    document.getElementById("Power_Stations_Filter").onchange = powerStationFilter;
+    document.getElementById("Power_Stations_Filter").onchange = PowerStationFilter;
+    document.getElementById("Inspector_Name_Filter").onchange = InspectorNameFilter;
+    document.getElementById("Status_Filter").onchange = StatusFilter;
 </script>

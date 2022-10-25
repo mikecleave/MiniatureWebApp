@@ -15,7 +15,6 @@ namespace MiniatureWebApp.Models
         public string InspectorName { get; set; }
         public string Comment { get; set; }
 
-        //[DisplayFormat(NullDisplayText = "Unknown")]
         public Status Status { get; set; }
         //public string Status { get; set; }
 
