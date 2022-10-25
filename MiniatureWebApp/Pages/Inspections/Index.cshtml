@@ -3,9 +3,12 @@
 
 @{
     ViewData["Title"] = "Inspections";
-    List<SelectListItem> List1 = new List<SelectListItem>();
-    List1.Add(new SelectListItem() { Text = "Apple" });
-    List1.Add(new SelectListItem() { Text = "Banana" });
+    
+    //Filter by Status
+    List<SelectListItem> inspectionStatus = new List<SelectListItem>();
+    inspectionStatus.Add(new SelectListItem() { Text = "PASS", Value = "PASS" });
+    inspectionStatus.Add(new SelectListItem() { Text = "FAIL", Value = "FAIL" });
+    inspectionStatus.Add(new SelectListItem() { Text = "SCHEDULE", Value = "SCHEDULE" });
 }
 
 <h1>Inspections</h1>
@@ -21,7 +24,14 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].PowerStation)
-                @Html.DropDownList("Power Stations Filter", ViewBag.PowerStationList as SelectList, "All")
+
+                <select id="Selector">
+                    <option value="white">White</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                </Select>
+                
+                @Html.DropDownList("Power Stations Filter", ViewBag.PowerStationSelectList as SelectList, "All")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].InspectorName)
@@ -29,7 +39,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].Status)
-                @Html.DropDownList("Status Filter", ViewBag.StatusList as SelectList, "All")
+                @Html.DropDownList("Status Filter", inspectionStatus, "All")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspection[0].Comment)
@@ -65,3 +75,11 @@
 }
     </tbody>
 </table>
+
+
+<script type = "text/javascript" src="~/js/filter.js"></script>                  
+
+<script>
+    document.getElementById("Selector").onchange = changeListener;
+    document.getElementById("Power_Stations_Filter").onchange = powerStationFilter;
+</script>
