@@ -21,7 +21,7 @@
         <tr>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
-                    @Html.DisplayNameFor(model => model.Inspection[0].Date)
+                    @Html.DisplayNameFor(model => model.Inspections[0].Date)
                 </a>
             </th>
             <th>
@@ -32,28 +32,28 @@
                     <option value="blue">Blue</option>
                 </Select>
                 -->
-                
                 @Html.DropDownList("Power Stations Filter", ViewBag.PowerStationSelectList as SelectList, "All")
+                
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
-                    @Html.DisplayNameFor(model => model.Inspection[0].PowerStation)
+                    @Html.DisplayNameFor(model => model.Inspections[0].PowerStation)
                 </a>                
             </th>
             <th>
                 @Html.DropDownList("Inspector Name Filter", ViewBag.InspectorNameList as SelectList, "All")
-                @Html.DisplayNameFor(model => model.Inspection[0].InspectorName)                
+                @Html.DisplayNameFor(model => model.Inspections[0].InspectorName)                
             </th>
             <th>
                 @Html.DropDownList("Status Filter", inspectionStatus, "All")
-                @Html.DisplayNameFor(model => model.Inspection[0].Status)                
+                @Html.DisplayNameFor(model => model.Inspections[0].Status)                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inspection[0].Comment)
+                @Html.DisplayNameFor(model => model.Inspections[0].Comment)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Inspection) {
+@foreach (var item in Model.Inspections) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
@@ -82,9 +82,16 @@
 </table>
 
 
-<script type = "text/javascript" src="~/js/filter.js"></script>                  
+@if (!string.IsNullOrEmpty(ViewData["selectedPowerStationIdFilter"] as string))
+{
+    <script>
+        document.getElementById("Power_Stations_Filter").value = @ViewData["selectedPowerStationIdFilter"];
+    </script>
+}
 
-<script>
+
+<script type = "text/javascript" src="~/js/filter.js"></script>                  
+<script>   
     document.getElementById("Power_Stations_Filter").onchange = PowerStationFilter;
     document.getElementById("Inspector_Name_Filter").onchange = InspectorNameFilter;
     document.getElementById("Status_Filter").onchange = StatusFilter;

@@ -19,8 +19,21 @@ function changeListener() {
 ///REMEMBER TO PRESS SHIFT F5 TO RELOAD MY JavaScript.
 function PowerStationFilter() {
     //console.log(JSON.stringify(this));
-    powerStationIdFilter = this.value
+    powerStationIdFilter = this.value;
+    //@powerStationIdFilter = this.value;
+    
     console.log("powerStationIdFilter: " + powerStationIdFilter);
+
+    let baseUrl = "https://" + window.location.host;
+    let filterUrl = "/Inspections?" + "powerStationIdFilter=" + powerStationIdFilter;
+
+    /*if (powerStationIdFilter = 0) {
+        window.location.assign(baseUrl + filterUrl)
+    }
+    */
+
+    console.log(baseUrl + filterUrl);
+    window.location.assign(baseUrl + filterUrl);
 }
 
 function InspectorNameFilter() {

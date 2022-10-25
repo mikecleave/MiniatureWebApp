@@ -22,48 +22,50 @@ namespace MiniatureWebApp.Pages.Inspections
             _context = context;
         }
 
-        public IList<Inspection> Inspection { get; set; } = default!;
+        public IList<Inspection> Inspections { get; set; } = default!;
         public string NameSort { get; set; }
         public string DateSort { get; set; }
 
+
         [BindProperty(SupportsGet = true)]
-        public int powerStationIdFilter { get; set; }
         public string inspectorNameFilter { get; set; }
+        [BindProperty(SupportsGet = true)] 
         public string statusFilter { get; set; }
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, int powerStationIdFilter)
         {
             if (_context.Inspections != null)
             {
-                //If any of the options for PowerStation the filer are selected
-                if (powerStationIdFilter != 0) {
-                    //I need a way to recall everything in the OnGet since it is only called when the page loads. 
-                    Console.WriteLine("Hello World!");
-                    Debug.WriteLine("TESTINGGGGGG");
-                    Debug.WriteLine(powerStationIdFilter);
-                    //https://localhost:7046/Inspections?/PSId=Darlington
 
-                    Inspection = await _context.Inspections
-                        .Where(i => i.PowerStation.Id == powerStationIdFilter)
-                        .Include(i => i.PowerStation).ToListAsync();
+
+                IQueryable<Inspection> inspectionIQ = _context.Inspections
+                    .Include(i => i.PowerStation);
+
+                //If any of the filters for PowerStation are selected
+                if (powerStationIdFilter != 0) {
+                    ViewData["selectedPowerStationIdFilter"] = powerStationIdFilter;
+
+                    inspectionIQ = _context.Inspections
+                        .Where(i => i.PowerStationId==powerStationIdFilter)
+                        .Include(i => i.PowerStation);
                 }
-                else if (inspectorNameFilter != null) {                    
-                    Inspection = await _context.Inspections
-                        .Where(i => i.InspectorName == inspectorNameFilter)
-                        .Include(i => i.PowerStation).ToListAsync();
+                else if (inspectorNameFilter != null)
+                {
+                    inspectionIQ = _context.Inspections
+                        .Where(i => i.InspectorName==inspectorNameFilter)
+                        .Include(i => i.InspectorName);
                 }
-                else {
-                    Inspection = await _context.Inspections
-                        .Include(i => i.PowerStation).ToListAsync();
+                else if (statusFilter != null)
+                {
+                    inspectionIQ = _context.Inspections
+                        //.Where(i => i.Status==statusFilter)
+                        .Include(i => i.Status);
                 }
 
 
                 //https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/sort-filter-page?view=aspnetcore-6.0
                 NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
                 DateSort = sortOrder == "Date" ? "date_desc" : "Date";
-
-                IQueryable<Inspection> inspectionIQ = _context.Inspections
-                    .Include(i => i.PowerStation);
 
                 switch (sortOrder)
                 {
@@ -80,8 +82,8 @@ namespace MiniatureWebApp.Pages.Inspections
                         inspectionIQ = inspectionIQ.OrderBy(s => s.PowerStation.Name);
                         break;
                 }
-                Inspection = await inspectionIQ.AsNoTracking().ToListAsync();
-                                
+                //use .ToList only at the end to convert it back from a queryable object to a model object. 
+                Inspections = await inspectionIQ.AsNoTracking().ToListAsync();          
 
 
                 //I am pretty sure this line is no longer used. 
