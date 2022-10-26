@@ -19,13 +19,13 @@ function changeListener() {
 ///REMEMBER TO PRESS SHIFT F5 TO RELOAD MY JavaScript.
 function PowerStationFilter() {
     //console.log(JSON.stringify(this));
-    powerStationIdFilter = this.value;
+    powerStationNameFilter = this.value;
     //@powerStationIdFilter = this.value;
     
-    console.log("powerStationIdFilter: " + powerStationIdFilter);
+    console.log("powerStationNameFilter: " + powerStationNameFilter);
 
     let baseUrl = "https://" + window.location.host;
-    let filterUrl = "/Inspections?" + "powerStationIdFilter=" + powerStationIdFilter;
+    let filterUrl = "/Inspections?" + "powerStationNameFilter=" + powerStationNameFilter;
 
     /*if (powerStationIdFilter = 0) {
         window.location.assign(baseUrl + filterUrl)

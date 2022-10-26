@@ -32,22 +32,20 @@ namespace MiniatureWebApp.Pages.Inspections
         [BindProperty(SupportsGet = true)] 
         public string statusFilter { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, int powerStationIdFilter)
+        public async Task OnGetAsync(string sortOrder, string powerStationNameFilter)
         {
             if (_context.Inspections != null)
             {
-
-
                 IQueryable<Inspection> inspectionIQ = _context.Inspections
                     .Include(i => i.PowerStation);
 
                 //If any of the filters for PowerStation are selected
-                if (powerStationIdFilter != 0) {
-                    ViewData["selectedPowerStationIdFilter"] = powerStationIdFilter;
+                if (powerStationNameFilter != null) {
+                    ViewData["selectedPowerStationNameFilter"] = powerStationNameFilter;                 
 
                     inspectionIQ = _context.Inspections
-                        .Where(i => i.PowerStationId==powerStationIdFilter)
-                        .Include(i => i.PowerStation);
+                        .Include(i => i.PowerStation)
+                        .Where(i => i.PowerStation.Name == powerStationNameFilter);
                 }
                 else if (inspectorNameFilter != null)
                 {
@@ -93,7 +91,7 @@ namespace MiniatureWebApp.Pages.Inspections
                 //https://www.youtube.com/watch?v=lx72JkMVGqk&ab_channel=ASP.NETMVC
                 //Filter by PowerStations
                 var powerStations = _context.PowerStations.ToList();
-                SelectList powerStationsSelectList = new SelectList(powerStations, "Id", "Name");
+                SelectList powerStationsSelectList = new SelectList(powerStations, "Name", "Name");
                 ViewData["PowerStationSelectList"]= powerStationsSelectList;
 
 

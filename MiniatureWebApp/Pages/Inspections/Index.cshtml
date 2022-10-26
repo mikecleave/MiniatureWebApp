@@ -81,14 +81,30 @@
     </tbody>
 </table>
 
-
-@if (!string.IsNullOrEmpty(ViewData["selectedPowerStationIdFilter"] as string))
-{
-    <script>
-        document.getElementById("Power_Stations_Filter").value = @ViewData["selectedPowerStationIdFilter"];
-    </script>
+@{
+    if (!string.IsNullOrEmpty(ViewData["selectedPowerStationNameFilter"] as string)) {
+        <script>
+            document.getElementById("Power_Stations_Filter").value = @ViewData["selectedPowerStationNameFilter"].ToString();
+        </script>
+    }
 }
 
+<!--
+@{
+    if (!string.IsNullOrEmpty(ViewData["selectedPowerStationIdFilter"] as string))
+    {
+        <script>
+            document.getElementById("Power_Stations_Filter").value = @ViewData["selectedPowerStationIdFilter"];
+        </script>
+    }
+    else
+    {
+        <script>
+            document.getElementById("Power_Stations_Filter").value = test;
+        </script>
+    }
+}
+-->
 
 <script type = "text/javascript" src="~/js/filter.js"></script>                  
 <script>   
