@@ -12,6 +12,8 @@ namespace MiniatureWebApp.Models
         public int Id { get; set; }
         public int PowerStationId { get; set; }
         public DateTime Date { get; set; }
+        
+        [Display(Name = "Inspector Name")]
         public string InspectorName { get; set; }
         public string Comment { get; set; }
 

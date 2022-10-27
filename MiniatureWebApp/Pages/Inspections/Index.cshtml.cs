@@ -22,42 +22,44 @@ namespace MiniatureWebApp.Pages.Inspections
             _context = context;
         }
 
-        public IList<Inspection> Inspections { get; set; } = default!;
+        public IList<Inspection> Inspections { get; set; } = default!; //Method Syntax
         public string NameSort { get; set; }
         public string DateSort { get; set; }
 
 
-        [BindProperty(SupportsGet = true)]
-        public string inspectorNameFilter { get; set; }
-        [BindProperty(SupportsGet = true)] 
-        public string statusFilter { get; set; }
+        //[BindProperty(SupportsGet = true)]
+        //public string inspectorNameFilter { get; set; }
+        //[BindProperty(SupportsGet = true)] 
+        //public string statusFilter { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string powerStationNameFilter)
+        public async Task OnGetAsync(string sortOrder, string powerStationNameFilter, string inspectorNameFilter, string statusFilter)
         {
             if (_context.Inspections != null)
             {
+                //IQueryable tutorial on joining data from 2 tables. 
+                //https://dotnettutorials.net/lesson/linq-joins-in-csharp/
+
+
                 IQueryable<Inspection> inspectionIQ = _context.Inspections
                     .Include(i => i.PowerStation);
 
+
                 //If any of the filters for PowerStation are selected
                 if (powerStationNameFilter != null) {
-                    ViewData["selectedPowerStationNameFilter"] = powerStationNameFilter;                 
-
-                    inspectionIQ = _context.Inspections
-                        .Include(i => i.PowerStation)
+                    ViewData["selectedPowerStationNameFilter"] = powerStationNameFilter;
+                    inspectionIQ = inspectionIQ
                         .Where(i => i.PowerStation.Name == powerStationNameFilter);
                 }
-                else if (inspectorNameFilter != null)
-                {
-                    inspectionIQ = _context.Inspections
-                        .Where(i => i.InspectorName==inspectorNameFilter)
-                        .Include(i => i.InspectorName);
+                
+                if (inspectorNameFilter != null) {
+                    ViewData["selectedInspectorNameFilter"] = inspectorNameFilter;
+                    inspectionIQ = inspectionIQ
+                        .Where(i => i.InspectorName == inspectorNameFilter);                        
                 }
-                else if (statusFilter != null)
-                {
-                    inspectionIQ = _context.Inspections
-                        //.Where(i => i.Status==statusFilter)
-                        .Include(i => i.Status);
+                
+                if (statusFilter != null) {
+                    inspectionIQ = inspectionIQ
+                        .Where(i => i.Status.ToString() == statusFilter);
                 }
 
 

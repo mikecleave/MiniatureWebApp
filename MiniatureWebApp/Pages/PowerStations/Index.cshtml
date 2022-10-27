@@ -11,6 +11,13 @@
     <a asp-page="Create">Create New</a>
 </p>
 
+<form>
+    <p>
+        Power Station Name: <input type="title" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -58,6 +65,7 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
+                <a asp-page="/Inspections/Create" asp-route-name="@item.Name">New Inspection</a> |
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>

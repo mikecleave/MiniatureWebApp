@@ -19,7 +19,7 @@ namespace MiniatureWebApp.Pages.Inspections
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string powerStationName)
         {
             ViewData["PowerStationId"] = new SelectList(_context.PowerStations, "Id", "Name");
 

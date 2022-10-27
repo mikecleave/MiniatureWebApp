@@ -20,12 +20,23 @@ namespace MiniatureWebApp.Pages.PowerStations
         }
 
         public IList<PowerStation> PowerStation { get;set; } = default!;
+        
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
 
         public async Task OnGetAsync()
         {
             if (_context.PowerStations != null)
             {
-                PowerStation = await _context.PowerStations.ToListAsync();
+                var powerStations = from p in _context.PowerStations
+                             select p;
+
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    powerStations = powerStations
+                        .Where(p => p.Name.Contains(SearchString));
+                }
+                PowerStation = await powerStations.ToListAsync();
             }
         }
     }

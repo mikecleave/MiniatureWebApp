@@ -1,4 +1,6 @@
-﻿/*
+﻿///REMEMBER TO PRESS SHIFT F5 TO RELOAD MY JavaScript.
+
+/*
 function changeListener() {
     var value = this.value;
     console.log(value);
@@ -27,11 +29,6 @@ function PowerStationFilter() {
     let baseUrl = "https://" + window.location.host;
     let filterUrl = "/Inspections?" + "powerStationNameFilter=" + powerStationNameFilter;
 
-    /*if (powerStationIdFilter = 0) {
-        window.location.assign(baseUrl + filterUrl)
-    }
-    */
-
     console.log(baseUrl + filterUrl);
     window.location.assign(baseUrl + filterUrl);
 }
@@ -40,10 +37,22 @@ function InspectorNameFilter() {
     //console.log(JSON.stringify(this));
     inspectorNameFilter = this.value
     console.log("inspectorNameFilter: " + inspectorNameFilter);
+
+    let baseUrl = "https://" + window.location.host;
+    let filterUrl = "/Inspections?" + "inspectorNameFilter=" + inspectorNameFilter;
+
+    console.log(baseUrl + filterUrl);
+    window.location.assign(baseUrl + filterUrl);
 }
 
 function StatusFilter() {
     //console.log(JSON.stringify(this));
     statusFilter = this.value
     console.log("statusFilter: " + statusFilter);
+
+    let baseUrl = "https://" + window.location.host;
+    let filterUrl = "/Inspections?" + "statusFilter=" + statusFilter;
+
+    console.log(baseUrl + filterUrl);
+    window.location.assign(baseUrl + filterUrl);
 }
