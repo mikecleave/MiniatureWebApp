@@ -91,13 +91,13 @@ namespace MiniatureWebApp.Pages.Inspections
 
 
                 //https://www.youtube.com/watch?v=lx72JkMVGqk&ab_channel=ASP.NETMVC
-                //Filter by PowerStations
+                //Create the dropdown filter for PowerStations
                 var powerStations = _context.PowerStations.ToList();
                 SelectList powerStationsSelectList = new SelectList(powerStations, "Name", "Name");
                 ViewData["PowerStationSelectList"]= powerStationsSelectList;
 
 
-                //Filter by Inspector Name
+                //Create the dropdown filter for Inspector Name
                 List<string> inspectorNamesList = _context.Inspections
                     .Select(i => i.InspectorName)
                     .Distinct()

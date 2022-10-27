@@ -11,39 +11,62 @@
     inspectionStatus.Add(new SelectListItem() { Text = "SCHEDULE", Value = "SCHEDULE" });
 }
 
-<h1>Inspections</h1> 
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<h1>Inspections</h1>
+
 <p>
-    <a asp-page="Create">Create New</a>
+    <a button type="button" class="btn btn-success" asp-page="Create">New Inspection</a>
 </p>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
-                    @Html.DisplayNameFor(model => model.Inspections[0].Date)
-                </a>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">@Html.DisplayNameFor(model => model.Inspections[0].Date)</a>
             </th>
             <th>
-                <!--
-                <select id="Selector">
-                    <option value="white">White</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                </Select>
-                -->
-                
-                @Html.DropDownList("Power Stations Filter", ViewBag.PowerStationSelectList as SelectList, "All")                
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">Power Station</a>                
-
+                <div>
+                    @Html.DropDownList("Power Stations Filter", ViewBag.PowerStationSelectList as SelectList, "All")
+                </div>                
+                <div>
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">Power Station</a>
+                </div>
             </th>
             <th>
-                @Html.DropDownList("Inspector Name Filter", ViewBag.InspectorNameList as SelectList, "All")
-                @Html.DisplayNameFor(model => model.Inspections[0].InspectorName)                
+                <div>
+                    @Html.DropDownList("Inspector Name Filter", ViewBag.InspectorNameList as SelectList, "All")
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.Inspections[0].InspectorName)                
+                </div>
             </th>
             <th>
-                @Html.DropDownList("Status Filter", inspectionStatus, "All")
-                @Html.DisplayNameFor(model => model.Inspections[0].Status)                
+                <div>
+                    @Html.DropDownList("Status Filter", inspectionStatus, "All")
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.Inspections[0].Status)                
+                </div>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Inspections[0].Comment)

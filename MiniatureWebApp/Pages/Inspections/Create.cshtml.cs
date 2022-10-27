@@ -21,7 +21,17 @@ namespace MiniatureWebApp.Pages.Inspections
 
         public IActionResult OnGet(string powerStationName)
         {
-            ViewData["PowerStationId"] = new SelectList(_context.PowerStations, "Id", "Name");
+            if (powerStationName != null)
+            {
+                var selectedPowerStationName = _context.PowerStations
+                    .Where(p => p.Name == powerStationName);
+                ViewData["PowerStationId"] = new SelectList(selectedPowerStationName, "Id", "Name");
+            }
+            else
+            {
+                ViewData["PowerStationId"] = new SelectList(_context.PowerStations, "Id", "Name");
+            }
+            
 
             List<string> statusList = new List<string>() {"Please select a status", "PASS", "FAIL", "SCHEDULED" };
             ViewData["StatusList"] = new SelectList(statusList);
