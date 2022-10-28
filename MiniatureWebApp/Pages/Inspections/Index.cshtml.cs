@@ -36,6 +36,8 @@ namespace MiniatureWebApp.Pages.Inspections
         {
             if (_context.Inspections != null)
             {
+                //Debug.WriteLine("Hello World!");
+
                 //IQueryable tutorial on joining data from 2 tables. 
                 //https://dotnettutorials.net/lesson/linq-joins-in-csharp/
 
