@@ -30,7 +30,7 @@ namespace MiniatureWebApp.Pages.PowerStations
                 return NotFound();
             }
 
-            var powerstation =  await _context.PowerStations.FirstOrDefaultAsync(m => m.Id == id);
+            var powerstation = await _context.PowerStations.FirstOrDefaultAsync(m => m.Id == id);
             if (powerstation == null)
             {
                 return NotFound();

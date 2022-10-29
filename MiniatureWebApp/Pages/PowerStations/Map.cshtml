@@ -1,0 +1,26 @@
+﻿@page
+@model MiniatureWebApp.Pages.PowerStations.MapModel
+
+@{
+    ViewData["Title"] = "Power Staion Map";
+}
+<!DOCTYPE html>
+
+<h2>Power Staion Map</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+
+<link rel="stylesheet" type="text/css" href="./style.css" />
+<script type="module" src="~/js/MapMulti.js"></script>
+
+<body>
+    <!--The div element for the map -->    
+    <div id="map" dataType:"json" jsonString=@ViewBag.powerStaionJsonString></div>
+    @ViewBag.powerStaionJsonString
+    <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_b0lFls_Ll_tbk4ftrvHA0msoFQrFI9c&callback=initMap">
+    </script>    
+</body>

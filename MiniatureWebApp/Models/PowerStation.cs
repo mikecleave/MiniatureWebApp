@@ -12,7 +12,6 @@ namespace MiniatureWebApp.Models
         {
             return Id + ", " + Name + ", " + Longitude + ", " + ", " + Latitude;
         }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public float Longitude { get; set; }

@@ -46,37 +46,29 @@ namespace MiniatureWebApp.Data
 
         public static void Initialize(MiniatureWebAppContext context)
         {
-            /*
             //If the database is empty                        
             if (context.PowerStations.Any())
             {
                 return;   //There are alreay power stations in the database
-            }
-            */
+            }            
 
             DataTable _dt = new DataTable();
             _dt = ImportSheet("PowerStations.xlsx");
 
-
             var powerStations = new List<PowerStation>();
- 
 
             foreach (DataRow dtRow in _dt.Rows)
             {
-                int Id = Int32.Parse(dtRow[_dt.Columns["Id"]].ToString());
                 var Name = dtRow[_dt.Columns["Name"]].ToString();
                 float Latitude = float.Parse(dtRow[_dt.Columns["Latitude"]].ToString());
                 float Longitude = float.Parse(dtRow[_dt.Columns["Longitude"]].ToString());
                 var Address = dtRow[_dt.Columns["Address"]].ToString();
                 var PhoneNumber = dtRow[_dt.Columns["PhoneNumber"]].ToString();
 
-                powerStations.Add(new PowerStation { Id = Id, Name = Name, Latitude = Latitude, Longitude = Longitude, Address = Address, PhoneNumber = PhoneNumber });
+                powerStations.Add(new PowerStation { Name = Name, Latitude = Latitude, Longitude = Longitude, Address = Address, PhoneNumber = PhoneNumber });
             }
-            Debug.WriteLine(powerStations[0].toString() + "Hello World!!!");
-            /*
             context.PowerStations.AddRange(powerStations);
-            context.SaveChanges();
-            */
+            context.SaveChanges();            
         }
     }
 }
