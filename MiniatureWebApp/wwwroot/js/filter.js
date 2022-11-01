@@ -1,27 +1,30 @@
 ﻿let sortOrder;
 
 ///REMEMBER TO PRESS SHIFT F5 TO RELOAD MY JavaScript.
+function ClearSessionStorage() {
+    sessionStorage.clear();
+}
+
 function PowerStationFilter() {
     powerStationNameFilter = this.value;
-    window.sessionStorage.setItem('powerStationNameFilter', powerStationNameFilter);
+    sessionStorage.setItem('powerStationNameFilter', powerStationNameFilter);
     BuildURL();
 }
 
 function InspectorNameFilter() {
     inspectorNameFilter = this.value
-    window.sessionStorage.setItem('inspectorNameFilter', inspectorNameFilter);
+    sessionStorage.setItem('inspectorNameFilter', inspectorNameFilter);
     BuildURL();
 }
 
 function StatusFilter() {
     statusFilter = this.value
-    window.sessionStorage.setItem('statusFilter', statusFilter);
+    sessionStorage.setItem('statusFilter', statusFilter);
     BuildURL();
 }
 
 function DateSort() {
     console.log("TESTING");
-    
     sortOrder = sessionStorage.getItem('sortOrder', sortOrder);
     console.log(sortOrder);
 
@@ -38,7 +41,7 @@ function DateSort() {
         sortOrder = "date_desc";
     }
     console.log("TEST2");
-    window.sessionStorage.setItem('sortOrder', sortOrder);
+    sessionStorage.setItem('sortOrder', sortOrder);
     console.log("BEFORE BUILD URL");
     BuildURL();
 }
@@ -53,7 +56,7 @@ function PowerStationSort() {
     else if (sortOrder == "name_desc") {
         sortOrder = "";
     }
-    window.sessionStorage.setItem('sortOrder', sortOrder);
+    sessionStorage.setItem('sortOrder', sortOrder);
     console.log("BEFORE BUILD URL");
     BuildURL();
 }
@@ -64,7 +67,30 @@ function BuildURL() {
     let powerStationNameFilter = sessionStorage.getItem('powerStationNameFilter');
     let inspectorNameFilter = sessionStorage.getItem('inspectorNameFilter');
     let statusFilter = sessionStorage.getItem('statusFilter');
-    let baseUrl = "https://" + window.location.host + "/Inspections?";
+
+    let hostName = "https://localhost:7046"
+
+    //let temp = window.location.href.replace(hostName, "")
+    let temp = window.location.href.replace(hostName, "");
+    sessionStorage.setItem('temp', temp);
+
+    let extension = temp.split("&", 1);
+    sessionStorage.setItem('extensionLength', extension[0].length);
+    if (extension[0].length < 20) {
+        extension[0] = extension[0].replace("?", "");
+    }
+    sessionStorage.setItem('extension', extension);
+
+    let baseUrl;
+    if (extension[0].includes("Inspection")) {
+        baseUrl = hostName + extension + "?";
+    }
+    else {
+        baseUrl = hostName + extension;
+    }
+    
+    sessionStorage.setItem('baseUrl', baseUrl);
+
     let fullURL = baseUrl;
 
     if (powerStationNameFilter != null) {

@@ -78,6 +78,7 @@ namespace MiniatureWebApp.Data
             if (context.Inspections.Any())
             {
                 //There are alreay inspections in the database
+                Debug.WriteLine("Hello World!");
             }
             else
             {

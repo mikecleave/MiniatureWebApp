@@ -44,9 +44,14 @@ namespace MiniatureWebApp.Pages.Inspections
                         .Where(i => i.InspectorName == inspectorNameFilter);                        
                 }
                 
-                if (statusFilter != null) {
-                    inspectionIQ = inspectionIQ
-                        .Where(i => i.Status.ToString() == statusFilter);
+                if (statusFilter != null)
+                {
+                    Status thisStatus = (Status)Enum.Parse(typeof(Status), statusFilter.ToString());
+                    if (statusFilter != null)
+                    {
+                        inspectionIQ = inspectionIQ
+                            .Where(i => i.Status == thisStatus);
+                    }
                 }
 
                 //https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/sort-filter-page?view=aspnetcore-6.0
@@ -70,9 +75,7 @@ namespace MiniatureWebApp.Pages.Inspections
                 //use .ToList only at the end to convert it back from a queryable object to a model object. 
                 Inspections = await inspectionIQ.AsNoTracking().Take(100).ToListAsync();          
 
-                //I am pretty sure this line is no longer used. 
                 ViewData["PowerStationNames"] = new SelectList(_context.PowerStations, "Id", "Name");
-
 
                 //https://www.youtube.com/watch?v=lx72JkMVGqk&ab_channel=ASP.NETMVC
                 //Create the dropdown filter for PowerStations
