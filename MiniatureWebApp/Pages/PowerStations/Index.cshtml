@@ -25,7 +25,6 @@
 </head>
 
 <h1>Power Stations</h1>
-
 <p>
     <a button type="button" class="btn btn-success" asp-page="Create">New Power Station</a>
 </p>
@@ -58,22 +57,11 @@
     </thead>
     <tbody>
 
-
     @foreach (var item in Model.PowerStation) {
         <tr >
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            
-            <!--
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            -->
-
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>

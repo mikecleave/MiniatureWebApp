@@ -3,6 +3,13 @@
 
 @{
     ViewData["Title"] = "Details";
+    
+    //Filter by Status
+    List<SelectListItem>
+    inspectionStatus = new List<SelectListItem>();
+    inspectionStatus.Add(new SelectListItem() { Text = "PASS", Value = "PASS" });
+    inspectionStatus.Add(new SelectListItem() { Text = "FAIL", Value = "FAIL" });
+    inspectionStatus.Add(new SelectListItem() { Text = "SCHEDULE", Value = "SCHEDULE" });
 }
 
 <h1>Power Station Details</h1>
@@ -26,7 +33,6 @@
       <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-
 
 <div>
     <a button type="button" class="btn btn-success" asp-page="/Inspections/Create" asp-route-powerStationName="@Model.PowerStation.Name">New Inspection</a>
@@ -67,20 +73,97 @@
     <dd class="col-sm-10">
         @Html.DisplayFor(model => model.PowerStation.Longitude)
     </dd>
-        
-
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script type="module" src="~/js/Map.js"></script>
-        
+            
     <body>
         <!--The div element for the map -->
         <div id="map" latitude=@Html.DisplayFor(model => model.PowerStation.Latitude) longitude=@Html.DisplayFor(model => model.PowerStation.Longitude)></div>
 
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_b0lFls_Ll_tbk4ftrvHA0msoFQrFI9c&callback=initMap&v=weekly"
-            defer
-        ></script>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <a onclick="DateSort()">@Html.DisplayNameFor(model => model.Inspections[0].Date)</a>
+                    </th>
+                    <th>
+                        <div>
+                            <a onclick="PowerStationSort()">Power Station</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div>
+                            @Html.DropDownList("Inspector Name Filter", ViewBag.InspectorNameList as SelectList, "All")
+                        </div>
+                        <div>
+                            @Html.DisplayNameFor(model => model.Inspections[0].InspectorName)
+                        </div>
+                    </th>
+                    <th>
+                        <div>
+                            @Html.DropDownList("Status Filter", inspectionStatus, "All")
+                        </div>
+                        <div>
+                            @Html.DisplayNameFor(model => model.Inspections[0].Status)
+                        </div>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inspections[0].Comment)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Inspections)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PowerStation.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InspectorName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comment)
+                        </td>
+
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </body>
 
 </dl>
 
+@{
+    if (!string.IsNullOrEmpty(ViewData["selectedInspectorNameFilter"] as string))
+    {
+        <script>
+            document.getElementById("Inspector_Name_Filter").value = "@ViewData["selectedInspectorNameFilter"].ToString()";
+        </script>
+    }
+}
+
+<script type="text/javascript" src="~/js/filter.js"></script>
+
+<script>
+    document.getElementById("Inspector_Name_Filter").onchange = InspectorNameFilter;
+    document.getElementById("Status_Filter").onchange = StatusFilter;
+</script>
+
+<link rel="stylesheet" type="text/css" href="./style.css" />
+<script type="module" src="~/js/Map.js"></script>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_b0lFls_Ll_tbk4ftrvHA0msoFQrFI9c&callback=initMap&v=weekly"
+    defer
+></script>

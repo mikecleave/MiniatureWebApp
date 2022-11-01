@@ -1,38 +1,90 @@
-﻿///REMEMBER TO PRESS SHIFT F5 TO RELOAD MY JavaScript.
+﻿let sortOrder;
+
+///REMEMBER TO PRESS SHIFT F5 TO RELOAD MY JavaScript.
 function PowerStationFilter() {
-    //console.log(JSON.stringify(this));
     powerStationNameFilter = this.value;
-    //@powerStationIdFilter = this.value;
-    
-    console.log("powerStationNameFilter: " + powerStationNameFilter);
-
-    let baseUrl = "https://" + window.location.host;
-    let filterUrl = "/Inspections?" + "powerStationNameFilter=" + powerStationNameFilter;
-
-    console.log(baseUrl + filterUrl);
-    window.location.assign(baseUrl + filterUrl);
+    window.sessionStorage.setItem('powerStationNameFilter', powerStationNameFilter);
+    BuildURL();
 }
 
 function InspectorNameFilter() {
-    //console.log(JSON.stringify(this));
     inspectorNameFilter = this.value
-    console.log("inspectorNameFilter: " + inspectorNameFilter);
-
-    let baseUrl = "https://" + window.location.host;
-    let filterUrl = "/Inspections?" + "inspectorNameFilter=" + inspectorNameFilter;
-
-    console.log(baseUrl + filterUrl);
-    window.location.assign(baseUrl + filterUrl);
+    window.sessionStorage.setItem('inspectorNameFilter', inspectorNameFilter);
+    BuildURL();
 }
 
 function StatusFilter() {
-    //console.log(JSON.stringify(this));
     statusFilter = this.value
-    console.log("statusFilter: " + statusFilter);
+    window.sessionStorage.setItem('statusFilter', statusFilter);
+    BuildURL();
+}
 
-    let baseUrl = "https://" + window.location.host;
-    let filterUrl = "/Inspections?" + "statusFilter=" + statusFilter;
+function DateSort() {
+    console.log("TESTING");
+    
+    sortOrder = sessionStorage.getItem('sortOrder', sortOrder);
+    console.log(sortOrder);
 
-    console.log(baseUrl + filterUrl);
-    window.location.assign(baseUrl + filterUrl);
+    if (sortOrder == null) {
+        sortOrder = "name_desc";
+    }
+    else if (sortOrder == "name_desc" || sortOrder == "") {
+        sortOrder = "date_desc";
+    }
+    else if (sortOrder == "date_desc") {
+        sortOrder = "Date";
+    }
+    else if (sortOrder == "Date") {
+        sortOrder = "date_desc";
+    }
+    console.log("TEST2");
+    window.sessionStorage.setItem('sortOrder', sortOrder);
+    console.log("BEFORE BUILD URL");
+    BuildURL();
+}
+
+function PowerStationSort() {
+    sortOrder = sessionStorage.getItem('sortOrder', sortOrder);
+    console.log(sortOrder);
+
+    if (sortOrder == null || sortOrder == "" || sortOrder == "Date" || sortOrder == "date_desc") {
+        sortOrder = "name_desc";
+    }
+    else if (sortOrder == "name_desc") {
+        sortOrder = "";
+    }
+    window.sessionStorage.setItem('sortOrder', sortOrder);
+    console.log("BEFORE BUILD URL");
+    BuildURL();
+}
+
+function BuildURL() {
+    console.log("START OF BUILD URL");
+    let sortOrder = sessionStorage.getItem('sortOrder');
+    let powerStationNameFilter = sessionStorage.getItem('powerStationNameFilter');
+    let inspectorNameFilter = sessionStorage.getItem('inspectorNameFilter');
+    let statusFilter = sessionStorage.getItem('statusFilter');
+    let baseUrl = "https://" + window.location.host + "/Inspections?";
+    let fullURL = baseUrl;
+
+    if (powerStationNameFilter != null) {
+        let powerStationNameFilterURL = "powerStationNameFilter=" + sessionStorage.getItem('powerStationNameFilter');
+        fullURL = fullURL + "&" + powerStationNameFilterURL;
+    }
+    if (inspectorNameFilter != null) {
+        let inspectorNameFilterURL = "inspectorNameFilter=" + sessionStorage.getItem('inspectorNameFilter');
+        fullURL = fullURL + "&" + inspectorNameFilterURL;
+    }
+    if (statusFilter != null) {
+        let statusFilterURL = "statusFilter=" + sessionStorage.getItem('statusFilter');
+        fullURL = fullURL + "&" + statusFilterURL;
+    }
+    if (sortOrder != null) {
+        let sortOrderURL = "sortOrder=" + sessionStorage.getItem('sortOrder');
+        fullURL = fullURL + "&" + sortOrderURL;
+    }
+
+    console.log("END OF BUILD URL");
+    window.sessionStorage.setItem('fullURL', fullURL);
+    window.location.assign(fullURL);
 }

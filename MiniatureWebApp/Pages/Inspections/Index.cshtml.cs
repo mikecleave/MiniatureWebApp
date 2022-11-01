@@ -21,30 +21,15 @@ namespace MiniatureWebApp.Pages.Inspections
         {
             _context = context;
         }
-
         public IList<Inspection> Inspections { get; set; } = default!; //Method Syntax
-        public string NameSort { get; set; }
-        public string DateSort { get; set; }
-
-
-        //[BindProperty(SupportsGet = true)]
-        //public string inspectorNameFilter { get; set; }
-        //[BindProperty(SupportsGet = true)] 
-        //public string statusFilter { get; set; }
 
         public async Task OnGetAsync(string sortOrder, string powerStationNameFilter, string inspectorNameFilter, string statusFilter)
         {
             if (_context.Inspections != null)
             {
                 //Debug.WriteLine("Hello World!");
-
-                //IQueryable tutorial on joining data from 2 tables. 
-                //https://dotnettutorials.net/lesson/linq-joins-in-csharp/
-
-
                 IQueryable<Inspection> inspectionIQ = _context.Inspections
                     .Include(i => i.PowerStation);
-
 
                 //If any of the filters for PowerStation are selected
                 if (powerStationNameFilter != null) {
@@ -64,11 +49,9 @@ namespace MiniatureWebApp.Pages.Inspections
                         .Where(i => i.Status.ToString() == statusFilter);
                 }
 
-
                 //https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/sort-filter-page?view=aspnetcore-6.0
-                NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                DateSort = sortOrder == "Date" ? "date_desc" : "Date";
-
+                Debug.WriteLine(sortOrder + "TESTING");
+                                
                 switch (sortOrder)
                 {
                     case "name_desc":
@@ -85,8 +68,7 @@ namespace MiniatureWebApp.Pages.Inspections
                         break;
                 }
                 //use .ToList only at the end to convert it back from a queryable object to a model object. 
-                Inspections = await inspectionIQ.AsNoTracking().ToListAsync();          
-
+                Inspections = await inspectionIQ.AsNoTracking().Take(100).ToListAsync();          
 
                 //I am pretty sure this line is no longer used. 
                 ViewData["PowerStationNames"] = new SelectList(_context.PowerStations, "Id", "Name");
@@ -97,7 +79,6 @@ namespace MiniatureWebApp.Pages.Inspections
                 var powerStations = _context.PowerStations.ToList();
                 SelectList powerStationsSelectList = new SelectList(powerStations, "Name", "Name");
                 ViewData["PowerStationSelectList"]= powerStationsSelectList;
-
 
                 //Create the dropdown filter for Inspector Name
                 List<string> inspectorNamesList = _context.Inspections

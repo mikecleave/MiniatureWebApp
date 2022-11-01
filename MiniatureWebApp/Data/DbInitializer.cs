@@ -46,29 +46,60 @@ namespace MiniatureWebApp.Data
 
         public static void Initialize(MiniatureWebAppContext context)
         {
-            //If the database is empty                        
+            //If the PowerStations database is empty                        
             if (context.PowerStations.Any())
             {
-                return;   //There are alreay power stations in the database
-            }            
+                //There are alreay power stations in the database
+                Debug.WriteLine("Hello World!");
 
-            DataTable _dt = new DataTable();
-            _dt = ImportSheet("PowerStations.xlsx");
-
-            var powerStations = new List<PowerStation>();
-
-            foreach (DataRow dtRow in _dt.Rows)
-            {
-                var Name = dtRow[_dt.Columns["Name"]].ToString();
-                float Latitude = float.Parse(dtRow[_dt.Columns["Latitude"]].ToString());
-                float Longitude = float.Parse(dtRow[_dt.Columns["Longitude"]].ToString());
-                var Address = dtRow[_dt.Columns["Address"]].ToString();
-                var PhoneNumber = dtRow[_dt.Columns["PhoneNumber"]].ToString();
-
-                powerStations.Add(new PowerStation { Name = Name, Latitude = Latitude, Longitude = Longitude, Address = Address, PhoneNumber = PhoneNumber });
             }
-            context.PowerStations.AddRange(powerStations);
-            context.SaveChanges();            
+            else
+            {
+                DataTable _dt = new DataTable();
+                _dt = ImportSheet("PowerStations.xlsx");
+
+                var powerStations = new List<PowerStation>();
+                foreach (DataRow dtRow in _dt.Rows)
+                {
+                    var Name = dtRow[_dt.Columns["Name"]].ToString();
+                    float Latitude = float.Parse(dtRow[_dt.Columns["Latitude"]].ToString());
+                    float Longitude = float.Parse(dtRow[_dt.Columns["Longitude"]].ToString());
+                    var Address = dtRow[_dt.Columns["Address"]].ToString();
+                    var PhoneNumber = dtRow[_dt.Columns["PhoneNumber"]].ToString();
+
+                    powerStations.Add(new PowerStation { Name = Name, Latitude = Latitude, Longitude = Longitude, Address = Address, PhoneNumber = PhoneNumber });
+                }
+                context.PowerStations.AddRange(powerStations);
+                context.SaveChanges();
+            }
+
+
+            //If the Inspections database is empty                        
+            if (context.Inspections.Any())
+            {
+                //There are alreay inspections in the database
+            }
+            else
+            {
+                DataTable _dt = new DataTable();
+                _dt = ImportSheet("Inspections.xlsx");
+
+                var inspections = new List<Inspection>();
+                foreach (DataRow dtRow in _dt.Rows)
+                {
+                    DateTime myDate = DateTime.Parse(dtRow[_dt.Columns["Date"]].ToString());
+                    int powerStationId = int.Parse(dtRow[_dt.Columns["PowerStationId"]].ToString());
+                    string inspectorName = dtRow[_dt.Columns["InspectorName"]].ToString();
+                    string comment = dtRow[_dt.Columns["Comment"]].ToString();
+                    var status = (Status)Enum.Parse(typeof(Status), dtRow[_dt.Columns["Status"]].ToString());
+
+                    inspections.Add(new Inspection { PowerStationId = powerStationId, Date= myDate, InspectorName = inspectorName, Comment = comment, Status = status});
+                }
+                context.Inspections.AddRange(inspections);
+                context.SaveChanges();
+            }
+
+
         }
     }
 }

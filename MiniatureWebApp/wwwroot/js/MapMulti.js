@@ -17,32 +17,29 @@ function initMap() {
         console.log(p);
         let latitude = parseFloat(powerStations[p].Latitude);
         let longitude = parseFloat(powerStations[p].Longitude);
+        let locationName = String(powerStations[p].Name);
         //console.log("latitude: " + latitude);
         //console.log("longitude: " + longitude);
+        console.log("locationName = " + locationName);
 
         let latLong = { lat: latitude, lng: longitude };
 
-        console.log("latLong = " + latLong);
+        console.log("latLong = " + JSON.stringify(latLong));
 
         if (count == 0) {
             count = count + 1;
 
             console.log("Setting Map Center");
             //The map, centered at location
-            const mapCenter = { lat: 43.869972, lng: -78.724945 };
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 4,
-                center: mapCenter,
-            });
+            const mapCenter = { lat: 47.67883443924906, lng: - 81.35067753295823 };
+
+            map = new google.maps.Map(document.getElementById("map"), {zoom: 6, center: mapCenter});
         }
 
+        //https://developers.google.com/maps/documentation/javascript/markers
         // The marker, positioned at location
-        let marker = new google.maps.Marker({
-            position: latLong,
-            map: map
-        });        
+        let marker = new google.maps.Marker({ position: latLong, map: map, title: locationName });        
         //marker.setMap(map);
-
     }
 }
 
