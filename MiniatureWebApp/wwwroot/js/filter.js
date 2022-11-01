@@ -63,7 +63,7 @@ function PowerStationSort() {
 
 function BuildURL() {
     console.log("START OF BUILD URL");
-    let sortOrder = sessionStorage.getItem('sortOrder');
+    sortOrder = sessionStorage.getItem('sortOrder');
     let powerStationNameFilter = sessionStorage.getItem('powerStationNameFilter');
     let inspectorNameFilter = sessionStorage.getItem('inspectorNameFilter');
     let statusFilter = sessionStorage.getItem('statusFilter');
@@ -88,7 +88,7 @@ function BuildURL() {
     else {
         baseUrl = hostName + extension;
     }
-    
+
     sessionStorage.setItem('baseUrl', baseUrl);
 
     let fullURL = baseUrl;
@@ -106,7 +106,7 @@ function BuildURL() {
         fullURL = fullURL + "&" + statusFilterURL;
     }
     if (sortOrder != null) {
-        let sortOrderURL = "sortOrder=" + sessionStorage.getItem('sortOrder');
+        sortOrderURL = "sortOrder=" + sessionStorage.getItem('sortOrder');
         fullURL = fullURL + "&" + sortOrderURL;
     }
 

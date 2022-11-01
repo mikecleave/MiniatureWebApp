@@ -77,6 +77,9 @@
     <body>
         <!--The div element for the map -->
         <div id="map" latitude=@Html.DisplayFor(model => model.PowerStation.Latitude) longitude=@Html.DisplayFor(model => model.PowerStation.Longitude)></div>
+        
+        <h1></h1>
+        <h1>Inspections</h1>
 
         <table class="table">
             <thead>
@@ -132,9 +135,9 @@
                         </td>
 
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                            <a asp-page="/Inspections/Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-page="/Inspections/Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-page="/Inspections/Delete" asp-route-id="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }
